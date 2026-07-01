@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Stock Médicaments - Infirmerie SCG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Infirmerie SCG</h1>
+            <p>Gestion du Stock de Médicaments</p>
+        </header>
+
+        <!-- Statistiques -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Total Médicaments</h3>
+                <p id="totalMeds">0</p>
+            </div>
+            <div class="stat-card warning">
+                <h3>Stock Faible</h3>
+                <p id="lowStock">0</p>
+            </div>
+            <div class="stat-card danger">
+                <h3>Périmés/Bientôt</h3>
+                <p id="expiredSoon">0</p>
+            </div>
+        </div>
+
+        <!-- Formulaire d'ajout -->
+        <div class="form-section">
+            <h2>➕ Ajouter/Modifier un Médicament</h2>
+            <form id="medicamentForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nom">Nom du médicament *</label>
+                        <input type="text" id="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categorie">Catégorie *</label>
+                        <select id="categorie" required>
+                            <option value="">Sélectionner</option>
+                            <option value="Antalgique">Antalgique</option>
+                            <option value="Antibiotique">Antibiotique</option>
+                            <option value="Anti-inflammatoire">Anti-inflammatoire</option>
+                            <option value="Antiseptique">Antiseptique</option>
+                            <option value="Pansement">Pansement</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantite">Quantité *</label>
+                        <input type="number" id="quantite" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unite">Unité *</label>
+                        <select id="unite" required>
+                            <option value="Boîte">Boîte</option>
+                            <option value="Flacon">Flacon</option>
+                            <option value="Comprimé">Comprimé</option>
+                            <option value="Ampoule">Ampoule</option>
+                            <option value="Tube">Tube</option>
+                            <option value="Unité">Unité</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seuilMin">Seuil Minimum</label>
+                        <input type="number" id="seuilMin" min="0" value="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateExpiration">Date d'expiration</label>
+                        <input type="date" id="dateExpiration">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emplacement">Emplacement</label>
+                        <input type="text" id="emplacement" placeholder="Ex: Armoire A, Étagère 2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numeroLot">N° de Lot</label>
+                        <input type="text" id="numeroLot">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span id="btnText">Ajouter</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="btnCancel">Annuler</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filtres et recherche -->
+        <div class="filter-section">
+            <input type="text" id="searchInput" placeholder="🔍 Rechercher un médicament...">
+            
+            <select id="filterCategorie">
+                <option value="">Toutes les catégories</option>
+                <option value="Antalgique">Antalgique</option>
+                <option value="Antibiotique">Antibiotique</option>
+                <option value="Anti-inflammatoire">Anti-inflammatoire</option>
+                <option value="Antiseptique">Antiseptique</option>
+                <option value="Pansement">Pansement</option>
+                <option value="Autre">Autre</option>
+            </select>
+
+            <select id="filterStock">
+                <option value="">Tous les stocks</option>
+                <option value="low">Stock faible</option>
+                <option value="expired">Périmés/Bientôt</option>
+            </select>
+
+            <button class="btn btn-export" id="btnExport">📥 Exporter CSV</button>
+        </div>
+
+        <!-- Tableau des médicaments -->
+        <div class="table-section">
+            <h2>📋 Liste des Médicaments</h2>
+            <div class="table-responsive">
+                <table id="medicamentsTable">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Catégorie</th>
+                            <th>Quantité</th>
+                            <th>Emplacement</th>
+                            <th>Date Exp.</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Les données seront insérées ici -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
